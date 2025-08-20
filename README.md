@@ -6,13 +6,10 @@
 
 ## 📋 Table of Contents
 1. [Overview](#overview)  
-2. [Prerequisites](#prerequisites)  
-3. [Quick Start](#quick-start)  
-4. [Usage Modes](#usage-modes)  
-5. [Outputs](#outputs)  
-6. [File Structure](#file-structure)  
-7. [Customisation](#customisation)  
-8. [Troubleshooting](#troubleshooting)
+2. [Prerequisites](#prerequisites)
+3. [Pipeline](#pipeline)  
+4. [Outputs](#outputs)     
+
 
 ---
 
@@ -35,7 +32,18 @@ This notebook / script:
 
 ---
 
-## 3. Quick Start <a id="quick-start"></a>
+## 3. Pipeline <a id="pipeline"></a>
+<img width="1404" height="50" alt="image" src="https://github.com/user-attachments/assets/f0f9de82-f29e-400f-b85f-20e60d797fd7" />
+
+flowchart TD
+    A[Raw Text] --> T[AutoTokenizer<br/>max_length=128]
+    T --> B[BERT-base-uncased<br/>768-D embeddings]
+    B --> L[Bi-LSTM<br/>256-D hidden × 2 directions]
+    L --> A2[Attention Layer<br/>weighted 256-D vector]
+    A2 --> D[Dropout 0.3]
+    D --> C[Linear(256 → 1)]
+    C --> S[Sigmoid → Probability]
+    S --> CL[Class<br/>0=No-Exp<br>1=Experience]
 1. **Upload your model & data**  
    - `best_model.pt` → `/content/drive/MyDrive/ELMo_Project/model_outputs/`
    - `config.json` → same folder
@@ -50,6 +58,10 @@ This notebook / script:
 
    # Copy-paste the full testing script (this file) into the next cell
 
+  
+
+---
+## 4.Outputs<a id="outputs"></a>
 <img width="715" height="483" alt="image" src="https://github.com/user-attachments/assets/2d0509ab-c2ae-4466-b79d-0553103329b7" />
 
 <img width="864" height="459" alt="image" src="https://github.com/user-attachments/assets/32408e31-0c1b-4f5f-b5c8-b6ac88068931" />
